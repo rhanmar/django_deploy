@@ -8,7 +8,7 @@ class DishFactory(factory.django.DjangoModelFactory):
 
     """
 
-    name = factory.Faker("name")
+    name = factory.Faker("word")
     price = factory.Sequence(lambda x: x)
 
     @factory.post_generation
@@ -29,7 +29,7 @@ class IngredientFactory(factory.django.DjangoModelFactory):
 
     """
 
-    name = factory.Faker("name")
+    name = factory.Faker("word")
 
     class Meta:
         model = Ingredient
