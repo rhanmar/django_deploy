@@ -4,6 +4,8 @@ services:
 
   nginx:
     build: ./nginx
+    volumes:
+      - static:/var/www/static/
     ports:
       - "80:80"
       - "8000:80"
@@ -17,7 +19,7 @@ services:
       dockerfile: Dockerfile
     command: gunicorn great_app.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - .:/app
+      - static:/app/static
     environment:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
@@ -41,4 +43,4 @@ services:
 
 volumes:
   postgresdata:
-
+  static:
