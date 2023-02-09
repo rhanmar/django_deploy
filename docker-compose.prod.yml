@@ -17,6 +17,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    entrypoint: ./entrypoint.prod.sh
     command: gunicorn great_app.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - static:/app/static
