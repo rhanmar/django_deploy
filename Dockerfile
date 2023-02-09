@@ -13,4 +13,5 @@ COPY . .
 
 EXPOSE 8000
 
+RUN chmod +x wait-for-db
 RUN chmod +x entrypoint.*
