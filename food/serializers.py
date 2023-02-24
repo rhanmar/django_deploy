@@ -23,6 +23,7 @@ class DishSerializer(serializers.ModelSerializer):
     """
 
     ingredients = IngredientSerializer(many=True)
+    ingredients_count = serializers.IntegerField()
 
     class Meta:
         model = Dish
@@ -30,5 +31,6 @@ class DishSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "price",
+            "ingredients_count",
             "ingredients",
         )

@@ -58,3 +58,26 @@ def test_detail(api_client, django_assert_num_queries):
     for ingredient_json in ingredients_json:
         assert "id" in ingredient_json
         assert "name" in ingredient_json
+
+
+@pytest.mark.django_db
+@pytest.mark.dishes
+def test_ingredients_count(api_client, django_assert_num_queries):
+    ingredient1 = IngredientFactory()
+    ingredient2 = IngredientFactory()
+    dish1 = DishFactory(ingredients=[ingredient1, ingredient2])
+    dish2 = DishFactory()
+
+    url = reverse("dishes-list")
+
+    with django_assert_num_queries(2):
+        response = api_client.get(url)
+    assert response.status_code == status.HTTP_200_OK
+    res_json = response.json()
+    assert len(res_json) == 2
+    for dish_json in res_json:
+        match dish_json["id"]:
+            case dish1.id:
+                assert dish_json["ingredients_count"] == 2
+            case dish2.id:
+                assert dish_json["ingredients_count"] == 0

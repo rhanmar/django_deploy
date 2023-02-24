@@ -38,6 +38,10 @@ class Dish(models.Model):
         verbose_name="Ингредиенты",
     )
 
+    @property
+    def ingredients_count(self) -> int:
+        return self.ingredients.count()
+
     def __str__(self) -> str:
         return f"Блюдо {self.name} | {self.price} руб."
 
