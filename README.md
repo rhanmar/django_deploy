@@ -1,5 +1,8 @@
 # django_deploy
-explore django deployment
+ 
+* django deployment
+* ci/cd
+* ...
 
 ### useful commands:
 * `docker-compose --remove-orphans`
