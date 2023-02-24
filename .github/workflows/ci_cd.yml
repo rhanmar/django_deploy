@@ -1,0 +1,27 @@
+name: django ci/cd
+
+
+on:
+  push:
+    branches:
+      master
+
+
+env:
+  GIT_URL: "https://github.com/rhanmar/django_deploy.git"
+
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+
+      - name: test
+        run: |
+            git clone $GIT_URL
+            cd django_deploy
+            docker compose -f docker-compose.yml build
+            docker compose -f docker-compose.yml up -d
+            docker compose exec backend pytest
