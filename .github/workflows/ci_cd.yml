@@ -28,6 +28,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
+    needs: test
     steps:
     - name: deploy
       uses: appleboy/ssh-action@v0.1.7
@@ -35,5 +36,4 @@ jobs:
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
-        script: whoami
-        run: python3 --version
+        script: docker ps
